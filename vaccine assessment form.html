@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>covid page</title>
+  <style type="text/css">
+      body{
+        background: skyblue;
+        margin: 25px;
+      }
+      h1{
+        background: white;
+        text-align: center;
+      }
+      form{
+        margin-left: auto;
+        margin-right: auto;
+        background: white;
+        vertical-align: center;
+        width: 900px;
+      }
+      table{
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid black;
+        text-align: center;
+      }
+      th{
+        border: 1px solid black;
+      }
+  </style>
+</head>
+<body>
+    <h1>COVID VACCINE ASSESSMENT</h1>
+    <form>
+        <table>
+            <thead>
+                <th>VITALS</th>
+                <th>8/14/20 at 13:26</th>
+                <th>8/14/20 at 14:52</th>
+                <th>8/14/20 at 15:16</th>
+            </thead>
+            <tr>
+                <th>TEMP</th>
+                <td>36.7</td>
+                <td>36.8</td>
+                <td>36.5</td>
+            </tr>
+            <tr>
+                <th>BP</th>
+                <td>120/80</td>
+                <td>130/72</td>
+                <td>112/65</td>
+            </tr>
+            <tr>
+                <th>PULSOX</th>
+                <td>92%</td>
+                <td>95%</td>
+                <td>95%</td>
+            </tr>
+            <tr>
+                <th>HR</th>
+                <td>85</td>
+                <td>76</td>
+                <td>79</td>
+            </tr>
+            <tr>
+                <th>RESP</th>
+                <td>16</td>
+                <td>20</td>
+                <td>18</td>
+            </tr>
+
+        </table>
+
+        <div id="ptstable">
+            <h2>Is your patient experiencing hemodynamic and/or respiratory instability?</h2>
+            <input id="unstable" type="radio" name="stability">
+            <label for="unstable">yes</label>
+            <input id="stable" type="radio" name="stability">
+            <label for="stable">no</label>
+        </div>  
+
+        <div id="ptmentated">
+            <h2>Can your patient make informed decisions OR do they have a decision maker at the bedside?</h2>
+            <input id="mentated" type="radio" name="mentation">
+            <label for="mentated">yes</label>
+            <input id="nonmentated" type="radio" name="mentation">
+            <label for="nonmentated">no</label>
+            <p></p>
+        </div>    
+
+        <fieldset>     
+            
+            <legend>Please ask your patient the following questions (refer to decision maker if patient unable)</legend>
+
+            <div id="ptvaccinated">
+                <h3>Have you recieved a Covid-19 vaccine?</h3>
+                <input id="vaccinated" type="radio" name="vaccination">
+                <label for="vaccinated">yes/unknown</label>
+                <input id="nonvaccinated" type="radio" name="vaccination">
+                <label for="nonvaccinated">no</label>
+            </div>
+
+            <div id="ptagreeable">
+                <h3>Would you like to recieve the <a href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/different-vaccines/janssen.html">Johnson and Johnson</a> covid vaccine?</h3>
+                <input id="agreeable" type="radio" name="agreeability">
+                <label for="agreeable">yes</label>
+                <input id="unagreeable" type="radio" name="agreeability">
+                <label for="unagreeable">no</label>
+                <input id="uncertain" type="radio" name="agreeability">
+                <label for="uncertain">maybe tomorrow</label>                
+            </div>
+
+            <div id="ptinfussed">
+                <h3>Have you recieved monoclonal Covid antibodies or convalescent plasma in the past 90 days?</h3>
+                <input id="infussed" type="radio" name="infussion">
+                <label for="infussed">yes</label>
+                <input id="noninfussed" type="radio" name="infussion">
+                <label for="noninfussed">no</label>
+            </div>
+
+            <div id="ptallergic">
+                <h3>Are you allergic to polysorbate?</h3>
+                <input id="allergic" type="radio" name="allergy">
+                <label for="allergic">yes</label>
+                <input id="nonallergic" type="radio" name="allergy">
+                <label for="nonallergic">no</label>
+            </div>
+
+            <div id="pthistory">
+                <h3>Please confirm that you do NOT have a history of Guillain Barre or an autoimmune clotting disorder</h3>
+                <input id="nonhistory" type="radio" name="historic">
+                <label for="nonhistory">confirm</label>
+                <input id="history" type="radio" name="historic">
+                <label for="history">no</label>
+            </div>
+            <p></p>
+
+
+        </fieldset>  
+
+    </form>
+    <h1>ALERT: Vaccine must be given within XX hours of arrival from pharmacy</h1>
+
+    <script type="text/javascript">
+        alert("Before the form is sent to the nurse, Powerchart will scan the patient's chart for any of the following variables:\n-female age 19-49\n-history of Guillain Barre\n-history of autoimmune clotting disorder\n-platelets < 150,000\n-temp > 38.1\n-systolic BP < 90\n-hr > 110\n-spO2 < 90%\n-O2 > 4L\n-FIO2 > 30%\nIf a statement from this list is found to be true, an alert will be sent to the providor asking them to confirm vaccine beneficence given the patient's risk. The nurse will recieve the form only after the providor has confirmed that the benefit of the vaccine outweighs the risk for this specific patient.");
+
+        const vitalicInstability = document.getElementById("unstable");
+        vitalicInstability.onclick = function(){
+            var para = document.createElement("P");
+            para.innerHTML = "***If hemodynamic/respiratory instability is selected, the task will close and return in 24 hours.";
+            para.style.color = "red";
+            document.getElementById('ptstable').appendChild(para)
+        };
+
+        const isUninformed = document.getElementById("nonmentated");
+        isUninformed.onclick = function(){
+            var para = document.createElement("P");
+            para.innerHTML = "***If mentally impaired patient does not have a decision maker at the bedside, the task will close and return in 24 hours";
+            para.style.color = "red";
+            document.getElementById('ptmentated').appendChild(para)
+        }
+        const isVaccinated = document.getElementById("vaccinated");
+        isVaccinated.onclick = function(){
+            var para = document.createElement("P");
+            para.innerHTML = "***If patient has already been vaccinated, the task will close permanently";
+            para.style.color = "red";
+            document.getElementById('ptvaccinated').appendChild(para)
+        }
+        const isJohnson = document.getElementById("unagreeable");
+        isJohnson.onclick = function(){
+            var para = document.createElement("P");
+            para.innerHTML = "***If patient declines the johnson and johnson vaccine, the task will close permanently";
+            para.style.color = "red";
+            document.getElementById('ptagreeable').appendChild(para)
+        }
+        const isUncertain = document.getElementById("uncertain");
+        isUncertain.onclick = function(){
+            var para = document.createElement("P");
+            para.innerHTML = "***If patient is not ready to recieve the vaccine, the task will close and return in 24 hours";
+            para.style.color = "red";
+            document.getElementById('ptagreeable').appendChild(para)
+        }
+        const isInfussed = document.getElementById("infussed");
+        isInfussed.onclick = function(){
+            var para = document.createElement("P");
+            para.innerHTML = "***If patient has already received MAB or c. plasma, the task will close permanently";
+            para.style.color = "red";
+            document.getElementById('ptinfussed').appendChild(para)
+        }
+        const isAllergic = document.getElementById("allergic");
+        isAllergic.onclick = function(){
+            var para = document.createElement("P");
+            para.innerHTML = "***If patient is allergic to polysorbate, the task will close permanently";
+            para.style.color = "red";
+            document.getElementById('ptallergic').appendChild(para)
+        }
+        const isHistoric = document.getElementById("history");
+        isHistoric.onclick = function(){
+           var para = document.createElement("P");
+            para.innerHTML = "***If past history of GB or ACD is selected, nurse will be prompted to give vaccine as soon as approval is recieved from providor so long as patient is still agreeable";
+            para.style.color = "red";
+            document.getElementById('pthistory').appendChild(para)
+        }
+    </script>
+
+</body>
+
+</html>
+
